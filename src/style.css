@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+}
+
+#container {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+
+    grid-template-columns: 10rem auto;
+    grid-template-rows: 6rem auto;
+    overflow: auto;
+    grid-template-areas:
+    "banner banner"
+    "menu content";
+}
+
+.banner{
+    background-color: #464646;
+    grid-area: banner;
+}
+
+.menu{
+    background-color: #b7ffc9;
+    grid-area: menu;
+}
+
+.content{
+    background-color: #fcf7f5;
+    grid-area: content;
+}
