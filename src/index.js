@@ -1,5 +1,6 @@
 //imports
 import './style.css'
+import loadMenu from './loadMenu.js'
 
 //functions
 function createContainer() {
@@ -17,7 +18,7 @@ function createDiv(name){
 
 function createLayout(container){
     container.appendChild(createDiv('banner'));
-    container.appendChild(createDiv('menu'));
+    loadMenu(container);
     container.appendChild(createDiv('content'));
 
     return container;
