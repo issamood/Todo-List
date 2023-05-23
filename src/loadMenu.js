@@ -3,33 +3,19 @@ export default function loadMenu(container){
     const menu = document.createElement('div');
     menu.classList.add('menu');
 
-    //Today Tab
-    const todayTab = document.createElement('div');
-    const todayTabIcon = document.createElement('div');
-    
-    todayTab.classList.add('tab');
-    todayTab.innerHTML = "Today";
-
-    todayTabIcon.classList.add('material-symbols-outline');
-    todayTabIcon.setAttribute('id','today');
-
-    todayTab.appendChild(todayTabIcon);
-
-    menu.appendChild(todayTab);
-
     //This month
-    const monthTab = document.createElement('div');
-    const monthTabIcon = document.createElement('div');
+    const taskTab = document.createElement('div');
+    const taskTabIcon = document.createElement('div');
     
-    monthTab.classList.add('tab');
-    monthTab.innerHTML = "This Month";
+    taskTab.classList.add('tab');
+    taskTab.innerHTML = "Tasks Due";
 
-    monthTabIcon.classList.add('icon');
-    monthTabIcon.setAttribute('id','month');
+    taskTabIcon.classList.add('icon');
+    taskTabIcon.setAttribute('id','task');
 
-    monthTab.appendChild(monthTabIcon);
+    taskTab.appendChild(taskTabIcon);
 
-    menu.appendChild(monthTab);
+    menu.appendChild(taskTab);
 
     //Projects
     const projects = document.createElement('div');
@@ -44,7 +30,7 @@ export default function loadMenu(container){
 
     addProject.innerHTML = "Add Project";
 
-    addProject.classList.add('addProject');
+    addProject.classList.add('tab');
     addProjectIcon.classList.add('icon');
     addProjectIcon.setAttribute('id','addProject');
 

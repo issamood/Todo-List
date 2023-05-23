@@ -1,6 +1,8 @@
 //imports
 import './style.css'
 import loadMenu from './loadMenu.js'
+import loadBanner from './loadBanner';
+import loadContent from './loadContent';
 
 //functions
 function createContainer() {
@@ -9,21 +11,16 @@ function createContainer() {
     document.body.appendChild(container);
 }
 
-function createDiv(name){
-    const element = document.createElement('div');
-    element.classList.add(name);
-
-    return element;
-}
-
 function createLayout(container){
-    container.appendChild(createDiv('banner'));
+    loadBanner(container);
     loadMenu(container);
-    container.appendChild(createDiv('content'));
+    loadContent(container);
 
     return container;
 }
 
 //Logic Application
 createContainer();
-createLayout(document.querySelector('#container'));
+const container = document.querySelector('#container')
+
+createLayout(container);

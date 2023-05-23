@@ -1,0 +1,20 @@
+export default function loadBanner(container){
+    const banner = document.createElement('div');
+    banner.classList.add('banner');
+
+    const titleIcon = document.createElement('div');
+    titleIcon.classList.add('icon');
+    titleIcon.setAttribute('id','title');
+
+    banner.appendChild(titleIcon);
+
+    const title = document.createElement('div');
+
+    title.innerHTML = "Todo List"
+    title.classList.add('titleText');
+
+    banner.appendChild(title);
+
+    container.appendChild(banner);
+    return container;
+}
