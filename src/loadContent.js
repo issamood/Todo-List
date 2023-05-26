@@ -71,9 +71,9 @@ export default function loadContent(container){
                 taskDesc.innerHTML = desc
                 taskDesc.classList.add('taskbarDesc');
 
-                const taskDue = document.createElement('div');
-                taskDue.innerHTML = due;
-                taskDue.classList.add('taskbarDue');
+                const taskbarDue = document.createElement('div');
+                taskbarDue.innerHTML = due;
+                taskbarDue.classList.add('taskbarDue');
 
                 const taskDelete = document.createElement('div');
                 taskDelete.classList.add('taskbarDelete');
@@ -83,12 +83,19 @@ export default function loadContent(container){
                 container.appendChild(doneLabel);
                 container.appendChild(taskTitle);
                 container.appendChild(taskDesc);
-                container.appendChild(taskDue);
+                container.appendChild(taskbarDue);
                 container.appendChild(taskDelete);
 
                 return container;
             }
+            return {title,desc,due,priority,bar};
         }
+        const title = document.querySelector('.taskContentTitle').value;
+        const desc = document.querySelector('.taskContentDesc').value;
+        const due = document.querySelector('.taskDueInput').value;
+        const priority = document.querySelector('input[name="priority"]:checked').id;
+
+        //All values working now
     });
 
     taskPriority.innerHTML = "Priority: "
@@ -159,6 +166,7 @@ export default function loadContent(container){
     taskDue.innerHTML = "Task Due:"
     taskDue.classList.add('taskDue');
     taskDueInput.setAttribute('type','date');
+    taskDueInput.classList.add('taskDueInput');
 
     //Append elements to taskWindowContent
     taskWindowContent.appendChild(taskContentTitle);
