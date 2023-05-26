@@ -1,3 +1,5 @@
+import {format, compareAsc} from 'date-fns';
+
 export default function loadContent(container){
     //Create content container
     const content = document.createElement('div');
@@ -17,6 +19,7 @@ export default function loadContent(container){
     //declare task window content
     const taskWindow = document.createElement('div');
     const taskWindowContent = document.createElement('div');
+    const taskContentHeaderBar = document.createElement('div');
     const taskContentHeader = document.createElement('h1');
     const taskContentTitle = document.createElement('input');
     const taskContentDesc = document.createElement('textarea');
@@ -24,38 +27,117 @@ export default function loadContent(container){
     const taskDue = document.createElement('div');
     const taskDueInput = document.createElement('input');
     const taskPriority = document.createElement('div');
-    const lowPriority = document.createElement('button');
-    const mediumPriority = document.createElement('button');
-    const highPriority = document.createElement('button');
+    const lowPriority = document.createElement('input');
+    const lowLabel = document.createElement('label');
+    const mediumPriority = document.createElement('input');
+    const mediumLabel = document.createElement('label');
+    const highPriority = document.createElement('input');
+    const highLabel = document.createElement('label');
+    const priorityDiv = document.createElement('div');
     const taskAdd = document.createElement('button');
 
     //define variables and set functions and classes.
     taskAdd.innerHTML = 'Add Task';
     taskAdd.classList.add('taskAdd');
     taskAdd.addEventListener('click', () => {
-        
+        const task = (title,desc,due,priority) => {
+            const bar = () => {
+                const container = document.createElement('div');
+
+                const priorityBar = document.createElement('div');
+                if (priority == "low"){
+                    priorityBar.classList.add('lowBar');
+                }
+                else if (priority == "medium"){
+                    priorityBar.classList.add('mediumBar');
+                }
+                else if(priority == "high"){
+                    priorityBar.classList.add('highBar');
+                }
+                const doneLabel = document.createElement('label');
+                doneLabel.classList.add('doneLabel');
+                const doneCheckbox = document.createElement('input');
+                doneCheckbox.setAttribute('checked','');
+                doneCheckbox.setAttribute('type','checkbox');
+
+                doneLabel.appendChild(doneCheckbox);
+                doneLabel.appendChild(document.createElement('span'));
+
+                const taskTitle = document.createElement('h3');
+                taskTitle.innerHTML = title;
+                taskTitle.classList.add('taskbarTitle');
+
+                const taskDesc = document.createElement('div');
+                taskDesc.innerHTML = desc
+                taskDesc.classList.add('taskbarDesc');
+
+                const taskDue = document.createElement('div');
+                taskDue.innerHTML = due;
+                taskDue.classList.add('taskbarDue');
+
+                const taskDelete = document.createElement('div');
+                taskDelete.classList.add('taskbarDelete');
+
+                //Appending to Container
+                container.appendChild(priorityBar);
+                container.appendChild(doneLabel);
+                container.appendChild(taskTitle);
+                container.appendChild(taskDesc);
+                container.appendChild(taskDue);
+                container.appendChild(taskDelete);
+
+                return container;
+            }
+        }
     });
 
     taskPriority.innerHTML = "Priority: "
     taskPriority.classList.add('taskPriority');
 
-    lowPriority.innerHTML = "Low";
-    mediumPriority.innerHTML = "Medium";
-    highPriority.innerHTML = "High";
+
+    lowPriority.setAttribute('type','radio');
+    lowPriority.setAttribute('id','low');
+    lowPriority.setAttribute('name','priority');
+    lowLabel.innerHTML = "Low";
+    lowLabel.setAttribute('for','low');
+    mediumPriority.setAttribute('type','radio');
+    mediumPriority.setAttribute('id','medium');
+    mediumPriority.setAttribute('name','priority');
+    mediumLabel.innerHTML = "Medium";
+    mediumLabel.setAttribute('for','medium');
+    highPriority.setAttribute('type','radio');
+    highPriority.setAttribute('id','high');
+    highPriority.setAttribute('name','priority');
+    highLabel.innerHTML = "High";
+    highLabel.setAttribute('for','High');
     lowPriority.classList.add('low');
     mediumPriority.classList.add('medium');
     highPriority.classList.add('high');
 
+    priorityDiv.appendChild(lowPriority);
+    priorityDiv.appendChild(lowLabel);
+    priorityDiv.appendChild(mediumPriority);
+    priorityDiv.appendChild(mediumLabel);
+    priorityDiv.appendChild(highPriority);
+    priorityDiv.appendChild(highLabel);
+    
+
     taskWindowContent.classList.add('taskWindowContent');
 
-    taskClose.setAttribute('id','closeTaskWindow');
-    taskClose.innerHTML = 'Close';
-    taskClose.addEventListener('click', () => {
-        taskWindow.classList.remove('show');
-    })
 
     taskContentHeader.classList.add('taskContentHeader');
     taskContentHeader.innerHTML = 'Add Task';
+
+    taskContentHeaderBar.classList.add('contentHeaderBar');
+    
+    taskClose.setAttribute('id','closeTaskWindow');
+    taskClose.addEventListener('click', () => {
+        taskWindow.classList.remove('show');
+        taskContentHeaderBar.classList.remove('showFlex');
+    })
+
+    taskContentHeaderBar.appendChild(taskContentHeader);
+    taskContentHeaderBar.appendChild(taskClose);
 
     taskContentTitle.classList.add('taskContentTitle');
     taskContentTitle.setAttribute('type','text');
@@ -70,25 +152,23 @@ export default function loadContent(container){
     window.addEventListener('click', (event) => {
         if (event.target == taskWindow) {
             taskWindow.classList.remove('show');
+            taskContentHeaderBar.classList.remove('showFlex');
         }
     })
 
     taskDue.innerHTML = "Task Due:"
     taskDue.classList.add('taskDue');
-    taskDueInput.setAttribute('type','text');
+    taskDueInput.setAttribute('type','date');
 
     //Append elements to taskWindowContent
-    taskWindowContent.appendChild(taskClose);
-    taskWindowContent.appendChild(taskContentHeader);
     taskWindowContent.appendChild(taskContentTitle);
     taskWindowContent.appendChild(taskContentDesc);
     taskWindowContent.appendChild(taskDue);
     taskWindowContent.appendChild(taskDueInput);
     taskWindowContent.appendChild(taskPriority);
-    taskWindowContent.appendChild(lowPriority);
-    taskWindowContent.appendChild(mediumPriority);
-    taskWindowContent.appendChild(highPriority);
+    taskWindowContent.appendChild(priorityDiv);
     taskWindowContent.appendChild(taskAdd);
+    taskWindow.appendChild(taskContentHeaderBar);
     taskWindow.appendChild(taskWindowContent);
     
 
@@ -98,6 +178,7 @@ export default function loadContent(container){
     //Add Event to show task window on click on add task
     add.addEventListener('click', () => {
         taskWindow.classList.add('show');
+        taskContentHeaderBar.classList.add('showFlex');
     });
 
     //Creating add task tab
