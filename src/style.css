@@ -36,6 +36,9 @@ body{
 .content{
     background-color: #fcf7f5;
     grid-area: content;
+    padding-top: 2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
 }
 
 .tab {
@@ -113,6 +116,15 @@ body{
     height: 1.2rem;
     align-self: flex-end;
     border-style: none;
+    cursor: pointer;
+}
+
+.taskbarDelete {
+    background: url(./images/delete.svg) no-repeat center center;
+    background-size: cover;
+    margin: 0px;
+    width: 1rem;
+    height: 1rem;
     cursor: pointer;
 }
 
@@ -287,3 +299,51 @@ body{
     background-color: currentColor;
    }
    
+   .taskBar {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 3rem;
+    width: 100%;
+
+    background-color: #e0dbd8;
+    border-radius: 10px;
+   }
+
+   .lowBar {
+    background-color: #71ff94;
+    width: .4rem;
+    height: 3rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+   }
+
+   .mediumBar {
+    background-color: #ffd900;
+    width: .4rem;
+    height: 3rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+   }
+
+   .highBar {
+    background-color: #ff6464;
+    width: .4rem;
+    height: 3rem;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+   }
+
+   .taskbarDue{
+    margin-left: auto;
+   }
+
+   .descWindow{
+    color: white;
+    background-color: #5f5e5d;
+    height: 8rem;
+    width: 100%;
+   }

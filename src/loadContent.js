@@ -43,6 +43,7 @@ export default function loadContent(container){
         const task = (title,desc,due,priority) => {
             const bar = () => {
                 const container = document.createElement('div');
+                container.classList.add('taskBar');
 
                 const priorityBar = document.createElement('div');
                 if (priority == "low"){
@@ -67,24 +68,41 @@ export default function loadContent(container){
                 taskTitle.innerHTML = title;
                 taskTitle.classList.add('taskbarTitle');
 
-                const taskDesc = document.createElement('div');
-                taskDesc.innerHTML = desc
-                taskDesc.classList.add('taskbarDesc');
-
                 const taskbarDue = document.createElement('div');
                 taskbarDue.innerHTML = due;
                 taskbarDue.classList.add('taskbarDue');
 
                 const taskDelete = document.createElement('div');
                 taskDelete.classList.add('taskbarDelete');
+                taskDelete.addEventListener('click',() => {
+                    content.removeChild(container);
+                })
+
+                container.addEventListener('click', ()=> {
+                    if (container.classList.contains('expanded')){
+                        //Close expanded div
+                        container.classList.remove('expanded');
+                        content.removeChild(document.querySelector('.descWindow'));
+                    }
+                    else {
+                        container.classList.add('expanded');
+                        const descWindow = document.createElement('div');
+                        descWindow.classList.add('descWindow');
+                        descWindow.innerHTML = desc;
+
+                        container.insertAdjacentElement('afterend',descWindow);
+                    }
+                })
 
                 //Appending to Container
                 container.appendChild(priorityBar);
                 container.appendChild(doneLabel);
                 container.appendChild(taskTitle);
-                container.appendChild(taskDesc);
                 container.appendChild(taskbarDue);
                 container.appendChild(taskDelete);
+
+                taskWindow.classList.remove('show');
+                taskContentHeaderBar.classList.remove('showFlex');
 
                 return container;
             }
@@ -96,6 +114,9 @@ export default function loadContent(container){
         const priority = document.querySelector('input[name="priority"]:checked').id;
 
         //All values working now
+
+        const newTask = task(title, desc, due, priority);
+        content.appendChild(newTask.bar());
     });
 
     taskPriority.innerHTML = "Priority: "
