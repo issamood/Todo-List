@@ -1,4 +1,5 @@
 import {format, compareAsc} from 'date-fns';
+import createBar from './createBar';
 
 export default function loadContent(container){
     //Create content container
@@ -120,7 +121,7 @@ export default function loadContent(container){
 
                 return container;
             }
-            return {title,desc,due,priority,bar};
+            return {title,desc,due,priority};
         }
         const title = document.querySelector('.taskContentTitle').value;
         const desc = document.querySelector('.taskContentDesc').value;
@@ -131,8 +132,10 @@ export default function loadContent(container){
 
         const newTask = task(title, desc, due, priority);
         tasksDueArray.push(newTask);
-        localStorage.setItem("tasksDue",JSON.stringify(tasksDueArray));
-        content.appendChild(newTask.bar());
+        sessionStorage.setItem("tasksDue",JSON.stringify(tasksDueArray));
+        content.appendChild(createBar(newTask.title, newTask.desc, newTask.due, newTask.priority));
+        taskWindow.classList.remove('show');
+        taskContentHeaderBar.classList.remove('showFlex');
     });
 
     taskPriority.innerHTML = "Priority: "

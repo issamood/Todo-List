@@ -355,3 +355,7 @@ body{
    .strike{
     text-decoration: line-through;
    }
+
+   .projectTab{
+    cursor: pointer;
+   }
