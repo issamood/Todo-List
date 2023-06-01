@@ -1,31 +1,47 @@
-export default function loadProject(project){
-    let projectName = project.innerHTML;
-    projectName = String(projectName);
+import createBar from "./createBar";
 
-    if (sessionStorage.getItem(projectName) === null){
-        const content = document.querySelector('.content');
-        const contentTitle = document.querySelector('.contentTitle');
-        
-        contentTitle.innerHTML = projectName;
+export default function loadProject(project) {
+    const projectName = project.innerHTML;
 
-        //Add Task Button
-        content.removeChild(document.querySelector('.add'));
-        const add = document.createElement('div');
-        add.classList.add('add');
-        const addIcon = document.createElement('div');
-        addIcon.classList.add('addIcon');
-        const addText = document.createElement('div');
-        addText.innerHTML = "Add Step";
-        addText.classList.add('addText')
-        add.appendChild(addIcon);
-        add.appendChild(addText);
-        add.addEventListener('click', () => {
-            
-        })
-
-        content.appendChild(add);
+    //Selectors
+    const content = document.querySelector('.content');
+    const contentTitle = document.querySelector('.contentTitle');
+    if (contentTitle.innerHTML === projectName){
+        return;
     }
-    else {
 
+    contentTitle.setAttribute('id',projectName);
+    contentTitle.innerHTML = projectName;
+
+
+    //Clear content window of tasks
+    const bars = document.querySelectorAll('.taskBar');
+    const descs = document.querySelectorAll('.descWindow');
+
+    for (const bar of bars) {
+        content.removeChild(bar);
+    }
+    for (const desc of descs){
+        content.removeChild(desc);
+    }
+
+    //Update add task button
+    const addText = document.querySelector(".addText");
+    const taskContentHeader = document.querySelector(".taskContentHeader");
+
+    taskContentHeader.innerHTML = "Add Step";
+    addText.innerHTML = "Add Step";
+
+    //Load steps (FINAL STEP)
+    if (sessionStorage.getItem(projectName) === null){
+        
+    }
+    else{
+        const steps = JSON.parse(sessionStorage.getItem(projectName));
+
+        for (let i in steps){
+            console.log(i);
+            content.appendChild(createBar(steps[i].title, steps[i].desc, steps[i].due, steps[i].priority))
+        }
     }
 }

@@ -1,6 +1,7 @@
 export default function createBar(title, desc, due, priority) {
     const container = document.createElement('div');
     const content = document.querySelector('.content');
+    const contentTitle = document.querySelector('.contentTitle');
     container.classList.add('taskBar');
 
     const priorityBar = document.createElement('div');
@@ -46,6 +47,26 @@ export default function createBar(title, desc, due, priority) {
     const taskDelete = document.createElement('div');
     taskDelete.classList.add('taskbarDelete');
     taskDelete.addEventListener('click', () => {
+        if (contentTitle.innerHTML === "Tasks To Do"){
+            const tasks = JSON.parse(sessionStorage.getItem("tasksDue"));
+            for (const i in tasks){
+                if (tasks[i].title === title){
+                    tasks.splice(i,1);
+                }
+                sessionStorage.setItem("tasksDue", JSON.stringify(tasks));
+            }
+        }
+        else{
+            const tasks = JSON.parse(sessionStorage.getItem(contentTitle.innerHTML));
+            for (const i in tasks){
+                if (tasks[i].title === title){
+                    tasks.splice(i,1);
+                }
+                sessionStorage.setItem(contentTitle.innerHTML, JSON.stringify(tasks));
+            }
+        }
+
+        //DELETE TASK DATA FROM ARRAY IN STORAGE
         content.removeChild(container);
     })
 

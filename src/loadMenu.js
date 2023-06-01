@@ -15,13 +15,37 @@ export default function loadMenu(container) {
     taskTab.innerHTML = "Tasks Due";
 
     taskTab.addEventListener('click', () => {
+        //Selecting necessary elements
         const content = document.querySelector(".content");
         const tasksDue = JSON.parse(sessionStorage.getItem("tasksDue"));
+        const contentTitle = document.querySelector(".contentTitle");
+        const taskAddText = document.querySelector(".addText");
 
-        console.log(tasksDue);
+        if (contentTitle === "Tasks To Do"){
+            return;
+        }
+
+        //Clear content from tasks
+        const taskBars = document.querySelectorAll('.taskBar');
+        const descs = document.querySelectorAll('.descWindow');
+
+        for (const taskBar of taskBars){
+            content.removeChild(taskBar);
+        }
+        for (const desc of descs){
+            content.removeChild(desc);
+        }
+
+        //Update title and add task button
+        contentTitle.innerHTML = "Tasks To Do";
+        taskAddText.innerHTML = "Add Task";
+
+        //Load in bar elements into content div
         for (const i in tasksDue) {
             content.appendChild(createBar(tasksDue[i].title, tasksDue[i].desc, tasksDue[i].due, tasksDue[i].priority));
         }
+
+        
     });
 
     taskTabIcon.classList.add('icon');
