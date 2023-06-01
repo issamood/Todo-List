@@ -35,6 +35,7 @@ export default function loadContent(container){
     const highLabel = document.createElement('label');
     const priorityDiv = document.createElement('div');
     const taskAdd = document.createElement('button');
+    const tasksDueArray = [];
 
     //define variables and set functions and classes.
     taskAdd.innerHTML = 'Add Task';
@@ -58,8 +59,21 @@ export default function loadContent(container){
                 const doneLabel = document.createElement('label');
                 doneLabel.classList.add('doneLabel');
                 const doneCheckbox = document.createElement('input');
-                doneCheckbox.setAttribute('checked','');
                 doneCheckbox.setAttribute('type','checkbox');
+                doneCheckbox.addEventListener('change', ()=> {
+                    if (doneCheckbox.checked) {
+                        taskTitle.classList.add('finished');
+                        taskTitle.classList.add('strike');
+                        taskbarDue.classList.add('finished');
+                        taskDelete.classList.add('finished');
+                    }
+                    else {
+                        taskTitle.classList.remove('finished');
+                        taskTitle.classList.remove('strike');
+                        taskbarDue.classList.remove('finished');
+                        taskDelete.classList.remove('finished');
+                    }
+                })
 
                 doneLabel.appendChild(doneCheckbox);
                 doneLabel.appendChild(document.createElement('span'));
@@ -116,6 +130,8 @@ export default function loadContent(container){
         //All values working now
 
         const newTask = task(title, desc, due, priority);
+        tasksDueArray.push(newTask);
+        localStorage.setItem("tasksDue",JSON.stringify(tasksDueArray));
         content.appendChild(newTask.bar());
     });
 

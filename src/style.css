@@ -347,3 +347,11 @@ body{
     height: 8rem;
     width: 100%;
    }
+
+   .finished{
+    opacity: .4;
+   }
+
+   .strike{
+    text-decoration: line-through;
+   }
