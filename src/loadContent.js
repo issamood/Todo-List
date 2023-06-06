@@ -86,6 +86,7 @@ export default function loadContent(container){
 
     taskPriority.innerHTML = "Priority: "
     taskPriority.classList.add('taskPriority');
+    priorityDiv.classList.add('priorityDiv');
 
 
     lowPriority.setAttribute('type','radio');
@@ -152,6 +153,8 @@ export default function loadContent(container){
     taskDue.innerHTML = "Task Due:"
     taskDue.classList.add('taskDue');
     taskDueInput.setAttribute('type','date');
+    const dateMin = new Date().toISOString().split("T")[0];
+    taskDueInput.setAttribute('min', dateMin);
     taskDueInput.classList.add('taskDueInput');
 
     //Append elements to taskWindowContent
