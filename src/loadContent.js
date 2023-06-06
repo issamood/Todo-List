@@ -36,11 +36,10 @@ export default function loadContent(container){
     const highLabel = document.createElement('label');
     const priorityDiv = document.createElement('div');
     const taskAdd = document.createElement('button');
-    const tasksDueArray = [];
 
     //define variables and set functions and classes.
     taskAdd.innerHTML = 'Add Task';
-    taskAdd.classList.add('taskAdd');
+    taskAdd.classList.add('taskAdd','button-16');
 
     taskAdd.addEventListener('click', () => {
         const task = (title,desc,due,priority) => {
@@ -59,15 +58,21 @@ export default function loadContent(container){
         const newTask = task(title, desc, due, priority);
 
         if (contentTitle.innerHTML == "Tasks To Do"){
-            console.log("tasks went");
-            tasksDueArray.push(newTask);
-            sessionStorage.setItem("tasksDue",JSON.stringify(tasksDueArray));
+            if ("tasksDue" in sessionStorage){
+                const tasksDueArray = JSON.parse(sessionStorage.getItem("tasksDue"));
+                tasksDueArray.push(newTask);
+                sessionStorage.setItem("tasksDue",JSON.stringify(tasksDueArray));
+            }
+            else {
+                const tasksDueArray = [newTask];
+                sessionStorage.setItem("tasksDue", JSON.stringify(tasksDueArray));
+            }
+
         }
         else {
            const projectName = contentTitle.id;
            if (projectName in sessionStorage){
-                const steps = JSON.parse(sessionStorage.getItem(projectName))
-
+                const steps = JSON.parse(sessionStorage.getItem(projectName));
                 steps.push(newTask);
                 sessionStorage.setItem(projectName, JSON.stringify(steps));
            }
@@ -97,16 +102,16 @@ export default function loadContent(container){
     highPriority.setAttribute('id','high');
     highPriority.setAttribute('name','priority');
     highLabel.innerHTML = "High";
-    highLabel.setAttribute('for','High');
+    highLabel.setAttribute('for','high');
     lowPriority.classList.add('low');
     mediumPriority.classList.add('medium');
     highPriority.classList.add('high');
 
-    priorityDiv.appendChild(lowPriority);
+    lowLabel.appendChild(lowPriority);
     priorityDiv.appendChild(lowLabel);
-    priorityDiv.appendChild(mediumPriority);
+    mediumLabel.appendChild(mediumPriority);
     priorityDiv.appendChild(mediumLabel);
-    priorityDiv.appendChild(highPriority);
+    highLabel.appendChild(highPriority);
     priorityDiv.appendChild(highLabel);
     
 

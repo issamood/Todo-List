@@ -1,5 +1,7 @@
-body{
+body {
     margin: 0;
+    font-family: 'Geologica', sans-serif;
+    font-size: 0.9rem;
 }
 
 #container {
@@ -13,28 +15,34 @@ body{
     grid-template-rows: 6rem auto;
     overflow: auto;
     grid-template-areas:
-    "banner banner"
-    "menu content";
+        "banner banner"
+        "menu content";
 }
 
-.banner{
-    background-color: #464646;
+.banner {
+    background-color: #909090;
     grid-area: banner;
 
     display: flex;
     flex-direction: row;
 
     align-items: center;
-    
+
 }
 
-.menu{
-    background-color: #b7ffc9;
-    grid-area: menu;
+.menu {
+    background-color: #b7ee7d;
+    display: flex;
+    flex-direction: column;
+    padding-top: .8rem;
 }
 
-.content{
-    background-color: #fcf7f5;
+.projects {
+    text-align: center;
+}
+
+.content {
+    background-color: #FAFAFA;
     grid-area: content;
     padding-top: 2.5rem;
     padding-left: 2.5rem;
@@ -50,11 +58,11 @@ body{
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 1,
-  'wght' 200,
-  'GRAD' 0,
-  'opsz' 48
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 48
 }
 
 .contentHeaderBar {
@@ -69,7 +77,7 @@ body{
     /*Add font style here*/
 }
 
-#task{
+#task {
     background: url(./images/task.svg) no-repeat center center;
     margin: 0px;
     background-size: cover;
@@ -77,7 +85,7 @@ body{
     height: 1rem;
 }
 
-#addProject{
+#addProject {
     background: url(./images/add.svg) no-repeat center center;
     margin: 0px;
     background-size: cover;
@@ -85,7 +93,7 @@ body{
     height: 1rem;
 }
 
-#title{
+#title {
     background: url(./images/banner.svg) no-repeat center center;
     margin: 0px;
     background-size: cover;
@@ -108,7 +116,7 @@ body{
     cursor: pointer;
 }
 
-#closeTaskWindow{
+#closeTaskWindow {
     background: url(./images/close.svg) no-repeat center center;
     margin: 0px;
     background-size: cover;
@@ -151,24 +159,27 @@ body{
     border-style: none;
     width: 380px;
     font-weight: bolder;
+    display: flex;
     flex-direction: column;
+
+    align-items: center;
 }
 
-.show{
+.show {
     display: block;
 }
 
-.showFlex{
+.showFlex {
     display: flex;
 }
 
 .doneLabel {
     position: relative;
     display: inline-block;
-   }
-   
-   /* Input */
-   .doneLabel > input {
+}
+
+/* Input */
+.doneLabel>input {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
@@ -188,17 +199,17 @@ body{
     transform: scale(1);
     pointer-events: none;
     transition: opacity 0.3s, transform 0.2s;
-   }
-   
-   /* Span */
-   .doneLabel > span {
+}
+
+/* Span */
+.doneLabel>span {
     display: inline-block;
     width: 100%;
     cursor: pointer;
-   }
-   
-   /* Box */
-   .doneLabel > span::before {
+}
+
+/* Box */
+.doneLabel>span::before {
     content: "";
     display: inline-block;
     box-sizing: border-box;
@@ -211,10 +222,10 @@ body{
     height: 18px;
     vertical-align: top;
     transition: border-color 0.2s, background-color 0.2s;
-   }
-   
-   /* Checkmark */
-   .doneLabel > span::after {
+}
+
+/* Checkmark */
+.doneLabel>span::after {
     content: "";
     display: block;
     position: absolute;
@@ -226,80 +237,80 @@ body{
     border-right: none;
     border-top: none;
     transform: translate(3px, 4px) rotate(-45deg);
-   }
-   
-   /* Checked, Indeterminate */
-   .doneLabel > input:checked,
-   .doneLabel > input:indeterminate {
+}
+
+/* Checked, Indeterminate */
+.doneLabel>input:checked,
+.doneLabel>input:indeterminate {
     background-color: #018786;
-   }
-   
-   .doneLabel > input:checked + span::before,
-   .doneLabel > input:indeterminate + span::before {
+}
+
+.doneLabel>input:checked+span::before,
+.doneLabel>input:indeterminate+span::before {
     border-color: #018786;
     background-color: #018786;
-   }
-   
-   .doneLabel > input:checked + span::after,
-   .doneLabel > input:indeterminate + span::after {
+}
+
+.doneLabel>input:checked+span::after,
+.doneLabel>input:indeterminate+span::after {
     border-color: #fff;
-   }
-   
-   .doneLabel > input:indeterminate + span::after {
+}
+
+.doneLabel>input:indeterminate+span::after {
     border-left: none;
     transform: translate(4px, 3px);
-   }
-   
-   /* Hover, Focus */
-   .doneLabel:hover > input {
+}
+
+/* Hover, Focus */
+.doneLabel:hover>input {
     opacity: 0.04;
-   }
-   
-   .doneLabel > input:focus {
+}
+
+.doneLabel>input:focus {
     opacity: 0.12;
-   }
-   
-   .doneLabel:hover > input:focus {
+}
+
+.doneLabel:hover>input:focus {
     opacity: 0.16;
-   }
-   
-   /* Active */
-   .doneLabel > input:active {
+}
+
+/* Active */
+.doneLabel>input:active {
     opacity: 1;
     transform: scale(0);
     transition: transform 0s, opacity 0s;
-   }
-   
-   .doneLabel > input:active + span::before {
+}
+
+.doneLabel>input:active+span::before {
     border-color: #85b8b7;
-   }
-   
-   .doneLabel > input:checked:active + span::before {
+}
+
+.doneLabel>input:checked:active+span::before {
     border-color: transparent;
     background-color: rgba(0, 0, 0, 0.6);
-   }
-   
-   /* Disabled */
-   .doneLabel > input:disabled {
+}
+
+/* Disabled */
+.doneLabel>input:disabled {
     opacity: 0;
-   }
-   
-   .doneLabel > input:disabled + span {
+}
+
+.doneLabel>input:disabled+span {
     color: rgba(0, 0, 0, 0.38);
     cursor: initial;
-   }
-   
-   .doneLabel > input:disabled + span::before {
+}
+
+.doneLabel>input:disabled+span::before {
     border-color: currentColor;
-   }
-   
-   .doneLabel > input:checked:disabled + span::before,
-   .doneLabel > input:indeterminate:disabled + span::before {
+}
+
+.doneLabel>input:checked:disabled+span::before,
+.doneLabel>input:indeterminate:disabled+span::before {
     border-color: transparent;
     background-color: currentColor;
-   }
-   
-   .taskBar {
+}
+
+.taskBar {
     display: flex;
     flex-direction: row;
 
@@ -311,51 +322,124 @@ body{
 
     background-color: #e0dbd8;
     border-radius: 10px;
-   }
+}
 
-   .lowBar {
+.lowBar {
     background-color: #71ff94;
     width: .4rem;
     height: 3rem;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-   }
+}
 
-   .mediumBar {
+.mediumBar {
     background-color: #ffd900;
     width: .4rem;
     height: 3rem;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-   }
+}
 
-   .highBar {
+.highBar {
     background-color: #ff6464;
     width: .4rem;
     height: 3rem;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-   }
+}
 
-   .taskbarDue{
+.taskbarDue {
     margin-left: auto;
-   }
+}
 
-   .descWindow{
+.descWindow {
     color: white;
-    background-color: #5f5e5d;
+    background-color: #909090;
     height: 8rem;
     width: 100%;
-   }
+}
 
-   .finished{
+.finished {
     opacity: .4;
-   }
+}
 
-   .strike{
+.strike {
     text-decoration: line-through;
-   }
+}
 
-   .projectTab{
+.projectTab {
     cursor: pointer;
-   }
+}
+
+/* geologica-200 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Geologica200';
+    font-style: normal;
+    font-weight: 200;
+    src: url('./fonts/geologica-v1-latin-200.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* geologica-regular - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Geologica';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/geologica-v1-latin-regular.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* geologica-700 - latin */
+@font-face {
+    font-display: swap;
+    /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Geologica700';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./fonts/geologica-v1-latin-700.woff2') format('woff2');
+    /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/*Aesthetic CSS*/
+.titleText {
+    font-family: 'Geologica700', sans-serif;
+    font-size: 3rem;
+    color: #FAFAFA;
+}
+
+/*Button Style Preset*/
+
+/* CSS */
+.button-16 {
+  background-color: #c2ff90;
+  border: 1px solid #f8f9fa;
+  border-radius: 4px;
+  color: #707070;
+  cursor: pointer;
+  font-family: arial,sans-serif;
+  font-size: 14px;
+  height: 36px;
+  line-height: 27px;
+  min-width: 54px;
+  padding: 0 16px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+}
+
+.button-16:hover {
+  border-color: #dadce0;
+  box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+  color: #202124;
+}
+
+.button-16:focus {
+  border-color: #4285f4;
+  outline: none;
+}
